@@ -11,6 +11,7 @@
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-grid.css" />
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-reboot.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="js/jquery.js"></script>
 
@@ -25,21 +26,69 @@
         <![endif]-->
     </head>
     <body>
+        
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #2C3E50; padding-top: 2px; padding-bottom: 2px;">
+            <a class="navbar-brand" href="/">
+                <img src="images/logo_navbar.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                COVID-CAMPANIA
+            </a>
+            <button class="navbar-toggler" type="button" 
+                    data-toggle="collapse" data-target="#navbarNavDropdown" 
+                    aria-controls="navbarNavDropdown" aria-expanded="false" 
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
 
-      <div class="centerpage">
-          
-          <div class="container">
-            {PAGE-CONTENT}
-          </div>
-          
-      </div> <!-- centerpage -->
-      
-      <div class="container">
-        <footer class="bs-footer footertext" role="contentinfo">
-            <p><img src="images/logo_small.png" /> &nbsp;&nbsp;&nbsp;&nbsp; Versione {RELEASE} - Tempo di generazione {GENERATION-TIME}</p>
-        </footer>
-      </div>
-      <script src="bootstrap/js/bootstrap.js"></script>
-      <script src="bootstrap/js/bootstrap.bundle.js"></script>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" 
+                           href="#" id="navbarCampaniaLink" 
+                           data-toggle="dropdown" 
+                           aria-haspopup="true" 
+                           aria-expanded="false">
+                            Campania
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarCampaniaLink">
+                            <a class="dropdown-item" href="./?p=main">Nuovi Positivi</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" 
+                           href="#" id="navbarCasertaLink" 
+                           data-toggle="dropdown" 
+                           aria-haspopup="true" 
+                           aria-expanded="false">
+                            Caserta
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarCasertaLink">
+
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </nav> 
+        
+        <script src="js/Chart.bundle.js"></script>
+        <div class="centerpage">
+            
+            <div class="container">
+              {PAGE-CONTENT}
+            </div>
+
+        </div> <!-- centerpage -->
+        
+        
+        <div class="container">
+            <div>fonte dati: <a href="https://github.com/pcm-dpc">Dipartimento della Protezione Civile</a></div>
+            <div style="height: 15px;"></div>
+            <footer class="bs-footer footertext" role="contentinfo">
+                <p><img src="images/logo_small.png" /> &nbsp;&nbsp;&nbsp;&nbsp; Versione {RELEASE} - Tempo di generazione {GENERATION-TIME}</p>
+            </footer>
+        </div>
+        
+        <script src="bootstrap/js/bootstrap.bundle.js"></script>      
     </body>
 </html>

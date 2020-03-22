@@ -4,3 +4,68 @@
     text-align: center;
     border-top: 1px solid #e5e5e5;
 }
+
+.btn-primary {
+    color: #FFF;
+    background-color: #990000 !important;
+    border-color: #990000 !important;
+}
+
+.btn-primary:hover {
+  color: #ffffff;
+  background-color: #660000 !important;
+  border-color: #330000 !important;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    text-decoration: none;
+    color: #FFF;
+    background-color: #660000 !important;
+}
+
+.label-primary {
+    background-color: #660000 !important;
+}
+
+.top-link {
+    color: #ED8E82 !important;
+}
+
+
+
+.navbar-brand div, .navbar-brand div img {
+    max-height: 100%; /* resize DOWN to height of container which is set to 50px */
+    height: 100%; /* resize UP to fit*/
+    max-width: 100%;  /*probably not necessary */
+    width: auto; /* resize based on height */
+    margin: 0 auto;
+    -o-object-fit: contain; /* Opera Support */
+    object-fit: contain; /* Resize down to fit container */
+}
+
+.nav-submenu-comment {
+    display: block;
+    padding: 3px 8px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857;
+    color: #888;
+    white-space: nowrap;
+}
+
+.nav-submenu-selected-item {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: bold;
+    background-color: #f5f5f5;
+    line-height: 1.42857;
+    color: #333;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.centerpage {
+    padding-bottom: 40px;
+    padding-top: 52px;
+}

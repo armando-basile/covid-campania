@@ -1,0 +1,53 @@
+    <div>
+        <h2>Campania: Nuovi Positivi</h2>
+    </div>
+    <div class="chart-wrapper" style="height: 70vh; width: 100%">
+        <canvas id="graph_nuovi_positivi" ></canvas>
+    </div>
+    <script>
+
+        // html object to fill with chart
+        var gnp = document.getElementById("graph_nuovi_positivi");
+
+        // data to use for chart
+        var dataContent = [{DATA}];
+        var labelContent = [{LABELS}];
+
+        var optionsContent = {
+            maintainAspectRatio: false,
+            responsive: true,
+            scales: {
+                xAxes: [{
+                    gridLines: {
+                        offsetGridLines: true,
+                        color: 'rgb(64, 64, 64)'
+                    }
+                }],
+                yAxes: [{
+                    gridLines: {
+                        offsetGridLines: true,
+                        color: 'rgb(44, 44, 44)'
+                    }
+                }]
+            }
+        };
+
+        Chart.defaults.global.legend = false;
+        Chart.defaults.global.defaultFontColor = 'rgb(140, 140, 140)';
+        var gnpChart = new Chart(gnp, {
+            type: 'line',
+            data: {
+                labels: labelContent,
+                datasets: [{
+                    label:"nuovi positivi",
+                    data:dataContent,
+                    //backgroundColor:"rgba(54, 162, 235, 0.9)",
+                    borderColor:"rgb(54, 162, 235)",
+                    borderWidth:0
+                }
+              ]
+            },
+            options: optionsContent
+        });
+
+    </script>
