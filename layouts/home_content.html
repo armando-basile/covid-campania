@@ -16,6 +16,11 @@
         var optionsContent = {
             maintainAspectRatio: false,
             responsive: true,
+            elements: {
+                line: {
+                    tension: 0
+                },
+            },
             scales: {
                 xAxes: [{
                     gridLines: {
@@ -32,6 +37,9 @@
             }
         };
 
+        
+        Chart.defaults.global.elements.point.radius=4;
+        Chart.defaults.global.elements.point.backgroundColor = "rgb(54, 162, 235)";
         Chart.defaults.global.legend = false;
         Chart.defaults.global.defaultFontColor = 'rgb(140, 140, 140)';
         var gnpChart = new Chart(gnp, {
