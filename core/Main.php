@@ -31,17 +31,15 @@ class Main
                 
         $html = $this->template;
         $content = $this->home_content;
-        $labelName = "denominazione_regione";
         $lableValue = "Campania";
-        $fieldName = "nuovi_attualmente_positivi";
         
-        $pdcExtractor = new PDCExtractor();
-        $pdcData = $pdcExtractor->GetData($dpc_regioni, $labelName, $lableValue, $fieldName);
+        $pdcExtractor = new PDCExtractor();        
+        $pdcData = $pdcExtractor->GetData($dpc_regioni, false, $lableValue);
         
         // update html code with dynamic data
-        $content = str_replace("{DATA}", implode(", ", $pdcData->data), $content);
         $content = str_replace("{LABELS}", implode(", ", $pdcData->labels), $content);
-        
+        $content = str_replace("{DATA}", implode(", ", $pdcData->nuovi_positivi), $content);
+                
         $html = str_replace("{PAGE-CONTENT}", $content, $html);
         
         return $html;

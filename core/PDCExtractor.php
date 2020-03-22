@@ -4,10 +4,17 @@ include_once ROOTPATH . "/core/CsvData.php";
 
 class PDCExtractor {
     
-    private $outData = null;
+    private $outData = null;    
     
-    private $labelPos = null;
-    private $fieldPos = null;
+    private $lblRegione        = "denominazione_regione";
+    private $lblProvincia      = "denominazione_provincia";
+    private $lblTotPositivi    = "totale_attualmente_positivi";
+    private $lblTotCasi        = "totale_casi";
+    private $lblNuoviPositivi  = "nuovi_attualmente_positivi";
+    private $lblDeceduti       = "deceduti";
+    private $lblDimessi        = "dimessi_guariti";
+    
+    
     
     /**
      * Constructor
@@ -15,12 +22,10 @@ class PDCExtractor {
     function __construct() {
         
          $this->outData = new CsvData();
-         $this->outData->labels = [];
-         $this->outData->data = [];
     }
     
     
-    public function GetData($url, $labelName, $lableValue, $fieldName) {
+    public function GetData($url, $isDistrict, $lableValue) {
         
         global $dpc_start_date, $dpc_end_date;
         $csvContent = null;
@@ -35,7 +40,7 @@ class PDCExtractor {
             
             try {
                 // try to get data from source
-                $this->GetDataFromCsv($fullUrl, $start_date, $labelName, $lableValue, $fieldName);
+                $this->GetDataFromCsv($fullUrl, $start_date, $isDistrict, $lableValue);
             
             } catch (Exception $Ex) {
                 // error occurred during get data
@@ -47,14 +52,20 @@ class PDCExtractor {
         }
         
         return $this->outData;
-        
     }
     
     
     
-    private function GetDataFromCsv($url, $day, $labelName, $lableValue, $fieldName) {
+    private function GetDataFromCsv($url, $day, $isDistrict, $lableValue) {
         
-        echo "<!-- url: " . $url . " -->\n";
+        //echo "<!-- url: " . $url . " -->\n";
+        
+        $posLabel = 0;
+        $posTotali = 0;
+        $posNuoviPositivi = 0;
+        $posDeceduti = 0;
+        $posDimessi = 0;
+                
         
         try {
             // try to get data from source
@@ -69,8 +80,25 @@ class PDCExtractor {
         $lines = explode("\n", $csvContent);        
         $headers = explode(",", $lines[0]);
         
-        $posLabel = array_search($labelName, $headers);
-        $posField = array_search($fieldName, $headers);
+        // extract data fields position
+        if ($isDistrict) {
+            // Provincia
+            $posLabel = array_search($this->lblProvincia, $headers);
+            $posTotali = array_search($this->lblTotCasi, $headers);
+            
+        } else {
+            // Regione
+            $posLabel = array_search($this->lblRegione, $headers);
+            $posTotali = array_search($this->lblTotPositivi, $headers);
+            $posNuoviPositivi = array_search($this->lblNuoviPositivi, $headers);
+            $posDeceduti = array_search($this->lblDeceduti, $headers);
+            $posDimessi = array_search($this->lblDimessi, $headers);
+        }
+        
+        // set day as label
+        $dayLabel = (new DateTime($day))->format("d/m");
+        
+        //echo "<!-- $posLabel; $posTotali; $posNuoviPositivi; $posDeceduti; $posDimessi -->\n";
         
         // extract data from csv
         for ($i=1; $i<count($lines); $i++) {
@@ -80,14 +108,20 @@ class PDCExtractor {
             if (trim($line) !== "") {                
                 $fields = explode(",", $line);
                 
-                $lineLabel = $fields[$posLabel];
-                $lineFiels = $fields[$posField];
-                
-                if (trim($lineLabel) === $lableValue) {
-                    $dayLabel = (new DateTime($day))->format("d/m");
+                // check for specific row found
+                if (trim($fields[$posLabel]) === $lableValue) {
+                    
                     array_push($this->outData->labels, "\"" . $dayLabel . "\"");
-                    array_push($this->outData->data, "\"" . $lineFiels . "\"");
-                }
+                    array_push($this->outData->totale_positivi, "\"" . $fields[$posTotali] . "\"");
+                    
+                    // check for regional data
+                    if (!$isDistrict) {
+                        // Regione
+                        array_push($this->outData->nuovi_positivi, "\"" . $fields[$posNuoviPositivi] . "\"");
+                        array_push($this->outData->dimessi, "\"" . $fields[$posDimessi] . "\"");
+                        array_push($this->outData->deceduti, "\"" . $fields[$posDeceduti] . "\"");
+                    }
+                }                
             }            
         }
         
