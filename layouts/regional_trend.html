@@ -1,0 +1,74 @@
+    <div>
+        <h4>Campania: Andamento regionale</h4>
+    </div>
+    <div class="chart-wrapper" style="height: 70vh; width: 100%">
+        <canvas id="graph_andamento" ></canvas>
+    </div>
+    <script>
+
+        // html object to fill with chart
+        var gnp = document.getElementById("graph_andamento");
+
+        // data to use for chart
+        var dataContent1 = [{DATA1}];
+        var dataContent2 = [{DATA2}];
+        var dataContent3 = [{DATA3}];
+        var labelContent = [{LABELS}];
+
+        var optionsContent = {
+            maintainAspectRatio: false,
+            responsive: true,
+            elements: {
+                line: {
+                    tension: 0
+                },
+            },
+            scales: {
+                xAxes: [{
+                    gridLines: {
+                        offsetGridLines: true,
+                        color: 'rgb(64, 64, 64)'
+                    }
+                }],
+                yAxes: [{
+                    gridLines: {
+                        offsetGridLines: true,
+                        color: 'rgb(44, 44, 44)'
+                    }
+                }]
+            }
+        };
+
+        
+        Chart.defaults.global.elements.point.radius=4;
+        
+        Chart.defaults.global.defaultFontColor = 'rgb(140, 140, 140)';
+        var gnpChart = new Chart(gnp, {
+            type: 'line',
+            data: {
+                labels: labelContent,
+                datasets: [{
+                    label:"Attualmente positivi",
+                    data:dataContent1,
+                    borderColor:"rgb(255, 170, 0)",
+                    pointBackgroundColor:"rgb(255, 170, 0)",
+                    borderWidth:0
+                }, {
+                    label:"Dimessi",
+                    data:dataContent2,
+                    borderColor:"rgb(76, 230, 0)",
+                    pointBackgroundColor:"rgb(76, 230, 0)",
+                    borderWidth:0
+                }, {
+                    label:"Deceduti",
+                    data:dataContent3,
+                    borderColor:"rgb(250, 250, 250)",
+                    pointBackgroundColor:"rgb(250, 250, 250)",
+                    borderWidth:0
+                }
+              ]
+            },
+            options: optionsContent
+        });
+
+    </script>

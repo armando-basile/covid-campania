@@ -33,6 +33,10 @@ class Base
             include_once ROOTPATH . "/core/Main.php";
             $manager = new Main();
             
+        } elseif ($page === "regional_trend") {
+            include_once ROOTPATH . "/core/Regional_trend.php";
+            $manager = new Regional_trend();  
+            
         } else {
             // if page not found use main
             include_once ROOTPATH . "/core/Main.php";
