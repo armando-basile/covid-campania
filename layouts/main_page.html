@@ -85,7 +85,17 @@
             <div>fonte dati: <a href="https://github.com/pcm-dpc">Dipartimento della Protezione Civile</a></div>
             <div style="height: 15px;"></div>
             <footer class="bs-footer footertext" role="contentinfo">
-                <p><img src="images/logo_small.png" /> &nbsp;&nbsp;&nbsp;&nbsp; Versione {RELEASE} - Tempo di generazione {GENERATION-TIME}</p>
+                <div style="display: inline-block;">
+                    <table>
+                        <tr>
+                            <td><img src="images/logo_small.png" /></td>
+                            <td style="padding-left: 36px; text-align: left">
+                                Versione {RELEASE}<br>
+                                <small>tempo di generazione {GENERATION-TIME} sec.</small>
+                            </td>
+                        </tr>
+                    </table>                
+                </div>
             </footer>
         </div>
         
