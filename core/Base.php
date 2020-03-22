@@ -37,6 +37,10 @@ class Base
             include_once ROOTPATH . "/core/Regional_trend.php";
             $manager = new Regional_trend();  
             
+        } elseif ($page === "district") {
+            include_once ROOTPATH . "/core/District.php";
+            $manager = new District();  
+            
         } else {
             // if page not found use main
             include_once ROOTPATH . "/core/Main.php";

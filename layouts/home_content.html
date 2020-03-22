@@ -1,5 +1,5 @@
     <div>
-        <h4>Campania: Nuovi Positivi</h4>
+        <h4>{TOP-LABEL}</h4>
     </div>
     <div class="chart-wrapper" style="height: 70vh; width: 100%">
         <canvas id="graph_nuovi_positivi" ></canvas>
@@ -47,7 +47,7 @@
             data: {
                 labels: labelContent,
                 datasets: [{
-                    label:"nuovi positivi",
+                    label:"{LABEL-VALUE}",
                     data:dataContent,
                     //backgroundColor:"rgba(54, 162, 235, 0.9)",
                     borderColor:"rgb(54, 162, 235)",

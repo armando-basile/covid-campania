@@ -14,11 +14,18 @@ $bs_theme = "darkly";
 // github source Dipartimento Protezione Civile
 $dpc_regioni   = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni-";
 $dpc_provincie = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-province/dpc-covid19-ita-province-";
-$dpc_start_date = '2020-02-24';
 $dpc_end_date = date("Y-m-d");
+$dpc_start_date = date ("Y-m-d", strtotime("-21 day", strtotime($dpc_end_date)));
 
 // set timezone for application
 date_default_timezone_set('Europe/Rome');
 
-        
+$districtName = [
+    "NA" => "Napoli",
+    "CE" => "Caserta",
+    "SA" => "Salerno",
+    "AV" => "Avellino",
+    "BN" => "Benevento"
+];
+
 ?>
