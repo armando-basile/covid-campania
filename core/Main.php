@@ -27,14 +27,14 @@ class Main
      */
     public function GetResponseCode()
     {
-        global $dpc_regioni;
+        global $local_regioni;
                 
         $html = $this->template;
         $content = $this->home_content;
         $lableValue = "Campania";
         
         $pdcExtractor = new PDCExtractor();        
-        $pdcData = $pdcExtractor->GetData($dpc_regioni, false, $lableValue);
+        $pdcData = $pdcExtractor->GetData($local_regioni, false, $lableValue);
         
         // update html code with dynamic data
         $content = str_replace("{LABELS}", implode(", ", $pdcData->labels), $content);
