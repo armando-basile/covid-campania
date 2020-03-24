@@ -16,6 +16,7 @@ function url_exists($url) {
     }
 }
 
+//echo "<!-- process from $dpc_start_date to $end_date -->\n";
 
 while (strtotime($end_date) >= strtotime($dpc_start_date)) {
             
