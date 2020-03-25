@@ -109,8 +109,21 @@ class PDCExtractor {
         }
         
         try {
+            // set start time 
+            //$tm = explode(' ', microtime());
+            //$st = $tm[1] + $tm[0];
+            
             // try to get data from source
             $csvContent = file_get_contents($url);
+            
+            // update generation time
+            //$ftm = explode(' ', microtime());
+            //$ft = $ftm[1] + $ftm[0];
+
+            // read time
+            //$total_tm = round(($ft - $st), 4);
+            //echo "<!-- file_get_contents($url) time: " . $total_tm . " -->\n";
+
         } catch (Exception $Ex) {
             // error detected
             echo "<!-- Unable to get day " . $day . ": " . $Ex->getMessage() . " -->\n";
