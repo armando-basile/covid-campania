@@ -1,6 +1,16 @@
 <?php
 
-include "../conf/config.php";
+$actualPath = "";
+
+if (isset($argc)) {
+	$actualPath = dirname($argv[0]);
+}
+
+if ($actualPath === "") {
+    return;
+}
+
+include $actualPath . "/../conf/config.php";
 
 $end_date = $dpc_end_date;
 
@@ -24,8 +34,8 @@ while (strtotime($end_date) >= strtotime($dpc_start_date)) {
     $urlDate = str_replace("-", "", $end_date);
     $fullUrlR = $urlR . $urlDate . ".csv";
     $fullUrlP = $urlP . $urlDate . ".csv";
-    $fullPathR = "../dpcdata/regioni/$urlDate.csv";
-    $fullPathP = "../dpcdata/province/$urlDate.csv";
+    $fullPathR = $actualPath . "/../dpcdata/regioni/$urlDate.csv";
+    $fullPathP = $actualPath . "/../dpcdata/province/$urlDate.csv";
     
     try {
         if (url_exists($fullUrlR)) {
