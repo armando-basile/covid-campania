@@ -13,6 +13,7 @@ if ($actualPath === "") {
 include $actualPath . "/../conf/config.php";
 
 $end_date = $dpc_end_date;
+$start_date = date ("Y-m-d", strtotime("-1 day", strtotime($dpc_end_date)));
 
 $urlR = $dpc_regioni;
 $urlP = $dpc_province;
@@ -28,7 +29,7 @@ function url_exists($url) {
 
 //echo "<!-- process from $dpc_start_date to $end_date -->\n";
 
-while (strtotime($end_date) >= strtotime($dpc_start_date)) {
+while (strtotime($end_date) >= strtotime($start_date)) {
             
     // Prepare url to get csv
     $urlDate = str_replace("-", "", $end_date);
