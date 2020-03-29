@@ -12,6 +12,7 @@ class PDCExtractor {
     private $lblProvincia      = "denominazione_provincia";
     private $lblTotPositivi    = "totale_attualmente_positivi";
     private $lblTotCasi        = "totale_casi";
+    private $lblTamponi        = "tamponi";
     private $lblNuoviPositivi  = "nuovi_attualmente_positivi";
     private $lblDeceduti       = "deceduti";
     private $lblDimessi        = "dimessi_guariti";
@@ -100,6 +101,7 @@ class PDCExtractor {
         
         $posLabel = 0;
         $posTotali = 0;
+        $posTamponi = 0;
         $posNuoviPositivi = 0;
         $posDeceduti = 0;
         $posDimessi = 0;
@@ -148,6 +150,7 @@ class PDCExtractor {
             $posNuoviPositivi = array_search($this->lblNuoviPositivi, $headers);
             $posDeceduti = array_search($this->lblDeceduti, $headers);
             $posDimessi = array_search($this->lblDimessi, $headers);
+            $posTamponi = array_search($this->lblTamponi, $headers);
         }
         
         // set day as label
@@ -175,6 +178,7 @@ class PDCExtractor {
                         array_push($this->outData->nuovi_positivi, "\"" . $fields[$posNuoviPositivi] . "\"");
                         array_push($this->outData->dimessi, "\"" . $fields[$posDimessi] . "\"");
                         array_push($this->outData->deceduti, "\"" . $fields[$posDeceduti] . "\"");
+                        array_push($this->outData->tamponi, "\"" . $fields[$posTamponi] . "\"");
                     }
                 }                
             }            

@@ -7,6 +7,7 @@ class CsvData {
     public $totale_positivi = null;
     public $deceduti = null;
     public $dimessi = null;
+    public $tamponi = null;
     public $labels = null;
     
     /**
@@ -17,6 +18,7 @@ class CsvData {
         $this->totale_positivi = [];
         $this->deceduti = [];
         $this->dimessi = [];
+        $this->tamponi = [];
         $this->labels = [];
     }
 }

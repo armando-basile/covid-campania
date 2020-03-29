@@ -38,8 +38,8 @@ class Main
         
         // update html code with dynamic data
         $content = str_replace("{LABELS}", implode(", ", $pdcData->labels), $content);
-        $content = str_replace("{DATA}", implode(", ", $pdcData->nuovi_positivi), $content);
-        $content = str_replace("{LABEL-VALUE}", "Nuovi positivi", $content);
+        $content = str_replace("{DATA1}", implode(", ", $pdcData->nuovi_positivi), $content);
+        $content = str_replace("{DATA2}", implode(", ", $pdcData->tamponi), $content);
         $content = str_replace("{TOP-LABEL}", "Campania: Nuovi Positivi", $content);
                 
         $html = str_replace("{PAGE-CONTENT}", $content, $html);
