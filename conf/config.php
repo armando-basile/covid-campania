@@ -4,8 +4,8 @@
 define("ROOTPATH", (string)filter_input(INPUT_SERVER, "DOCUMENT_ROOT"));
 
 // application properties
-define("APP_REL", "0.2.3");
-define("APP_RELDATE", "2020-03-29");
+define("APP_REL", "0.2.4");
+define("APP_RELDATE", "2020-03-30");
 define("BAR_TITLE", "COVID CAMPANIA");
 
 // set timezone for application

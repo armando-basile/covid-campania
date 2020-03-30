@@ -7,6 +7,8 @@ class PDCExtractor {
     
     private $outData = null;    
     private $outDistricts = null;   
+    private $firstDay = true;
+    private $totalTamponi = 0;
     
     private $lblRegione        = "denominazione_regione";
     private $lblProvincia      = "denominazione_provincia";
@@ -16,6 +18,7 @@ class PDCExtractor {
     private $lblNuoviPositivi  = "nuovi_attualmente_positivi";
     private $lblDeceduti       = "deceduti";
     private $lblDimessi        = "dimessi_guariti";
+    
     
     
     
@@ -35,6 +38,7 @@ class PDCExtractor {
         $csvContent = null;
         
         $start_date = $dpc_start_date;
+        $this->firstDay = true;
         
         while (strtotime($start_date) <= strtotime($dpc_end_date)) {
             
@@ -168,18 +172,28 @@ class PDCExtractor {
                 
                 // check for specific row found
                 if (trim($fields[$posLabel]) === $lableValue) {
-                    
-                    array_push($this->outData->labels, "\"" . $dayLabel . "\"");
-                    array_push($this->outData->totale_positivi, "\"" . $fields[$posTotali] . "\"");
-                    
-                    // check for regional data
-                    if (!$isDistrict) {
-                        // Regione
-                        array_push($this->outData->nuovi_positivi, "\"" . $fields[$posNuoviPositivi] . "\"");
-                        array_push($this->outData->dimessi, "\"" . $fields[$posDimessi] . "\"");
-                        array_push($this->outData->deceduti, "\"" . $fields[$posDeceduti] . "\"");
-                        array_push($this->outData->tamponi, "\"" . $fields[$posTamponi] . "\"");
-                    }
+                    // update data
+                    if ($this->firstDay === false) {
+                        array_push($this->outData->labels, "\"" . $dayLabel . "\"");
+                        array_push($this->outData->totale_positivi, "\"" . $fields[$posTotali] . "\"");
+
+                        // check for regional data
+                        if (!$isDistrict) {
+                            // Regione
+                            $tamponiForDay = intval($fields[$posTamponi]) - $this->totalTamponi;
+                            $this->totalTamponi = intval($fields[$posTamponi]);
+                            
+                            array_push($this->outData->nuovi_positivi, "\"" . $fields[$posNuoviPositivi] . "\"");
+                            array_push($this->outData->dimessi, "\"" . $fields[$posDimessi] . "\"");
+                            array_push($this->outData->deceduti, "\"" . $fields[$posDeceduti] . "\"");
+                            array_push($this->outData->tamponi, "\"" . $tamponiForDay . "\"");                            
+                        }
+                        
+                    } else {
+                        // get only tamponi
+                        $this->firstDay = false;
+                        $this->totalTamponi = intval($fields[$posTamponi]);
+                    }  
                 }                
             }            
         }
