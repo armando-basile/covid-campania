@@ -12,10 +12,10 @@ class PDCExtractor {
     
     private $lblRegione        = "denominazione_regione";
     private $lblProvincia      = "denominazione_provincia";
-    private $lblTotPositivi    = "totale_attualmente_positivi";
+    private $lblTotPositivi    = "totale_positivi";
     private $lblTotCasi        = "totale_casi";
     private $lblTamponi        = "tamponi";
-    private $lblNuoviPositivi  = "nuovi_attualmente_positivi";
+    private $lblNuoviPositivi  = "nuovi_positivi";
     private $lblDeceduti       = "deceduti";
     private $lblDimessi        = "dimessi_guariti";
     
@@ -155,12 +155,14 @@ class PDCExtractor {
             $posDeceduti = array_search($this->lblDeceduti, $headers);
             $posDimessi = array_search($this->lblDimessi, $headers);
             $posTamponi = array_search($this->lblTamponi, $headers);
+        
+            //echo "<!-- \n posLabel: $posLabel\n posTotali: $posTotali\n posNuoviPositivi: $posNuoviPositivi\n posDeceduti: $posDeceduti\n posDimessi: $posDimessi\n posTamponi: $posTamponi \n -->\n";
         }
         
         // set day as label
         $dayLabel = (new DateTime($day))->format("d/m");
         
-        //echo "<!-- $posLabel; $posTotali; $posNuoviPositivi; $posDeceduti; $posDimessi -->\n";
+        
         
         // extract data from csv
         for ($i=1; $i<count($lines); $i++) {
